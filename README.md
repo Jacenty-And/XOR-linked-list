@@ -29,4 +29,137 @@ The behavior of the NEXT, PREV and DEL_ACT commands suggests action on a circula
 
 DEL_BEG, DEL_END, DEL_VAL, and DEL_ACT commands for an empty list do not remove anything. In each of these cases, removing the currently pointed element (ACTUAL command) should result in moving the currently pointed element pointer to the preceding element, and if it does not exist, to the last element of the list.
 
-Standard C ++ Template Library (STL) cannot be used. Please remember to free memory when deleting list elements. Please also delete the entire list before exiting the program, freeing up all memory occupied by all its elements.
+Standard C ++ Template Library (STL) cannot be used. Please remember to free memory when deleting list elements. Please also delete the entire list before exiting the program, freeing up all memory occupied by all its elements.  
+
+---
+
+#### Input
+A number of commands that run specific functionalities in the list.
+
+---
+
+#### Output
+The results of the operation of the appropriate commands on the list with a certain state. Initially, the list is empty and its later status depends on the commands that are previously invoked. Some commands do not generate any output, e.g. (ADD_BEG, DEL_ACT) but affect the state of the list and other commands that display certain information, e.g. (ACTUAL, PRINT_FORWARD).
+
+---
+
+#### Examples
+Input1:  
+```
+ADD_BEG 1
+ADD_BEG 2
+ADD_BEG 3
+ADD_END 4
+PRINT_FORWARD
+PRINT_BACKWARD
+```
+| Input:         | Output: |
+|----------------|---------|
+| ADD_BEG 1      |         | 
+| ADD_BEG 2      |         |
+| ADD_BEG 3      |         |
+| ADD_END 4      |         |
+| PRINT_FORWARD  | 3 2 1 4 |
+| PRINT_BACKWARD | 4 1 2 3 | 
+
+    
+Input2:  
+```
+ACTUAL  
+ADD_BEG 1  
+ACTUAL  
+ADD_BEG 2  
+ADD_BEG 3  
+ADD_END 4  
+PRINT_FORWARD  
+PRINT_BACKWARD  
+ACTUAL  
+NEXT  
+ACTUAL  
+NEXT  
+NEXT  
+PREV  
+ACTUAL  
+PREV  
+PREV  
+```
+| Input:         | Output: |
+|----------------|---------|
+| ACTUAL         | NULL    |
+| ADD_BEG 1      |         |
+| ACTUAL         | 1       |
+| ADD_BEG 2      |         |
+| ADD_BEG 3      |         |
+| ADD_END 4      |         |
+| PRINT_FORWARD  | 3 2 1 4 |
+| PRINT_BACKWARD | 4 1 2 3 |
+| ACTUAL         | 1       |
+| NEXT           | 4       |
+| ACTUAL         | 4       |
+| NEXT           | 3       |
+| NEXT           | 2       |
+| PREV           | 3       |
+| ACTUAL         | 3       |
+| PREV           | 4       |
+| PREV           | 1       |
+  
+  
+Input3:  
+```
+ACTUAL  
+NEXT  
+PREV  
+ADD_BEG 1  
+ACTUAL  
+NEXT  
+PREV  
+DEL_BEG  
+ACTUAL  
+NEXT  
+PREV  
+ADD_BEG 2  
+ACTUAL  
+NEXT  
+PREV  
+DEL_END  
+ACTUAL  
+NEXT  
+PREV  
+ADD_END 3  
+ACTUAL  
+NEXT  
+PREV  
+DEL_BEG  
+ACTUAL  
+NEXT  
+PREV  
+```
+| Input:    | Output: |
+|-----------|---------|
+| ACTUAL    | NULL    |
+| NEXT      | NULL    |
+| PREV      | NULL    |
+| ADD_BEG 1 |         |
+| ACTUAL    | 1       |
+| NEXT      | 1       |
+| PREV      | 1       |
+| DEL_BEG   |         |
+| ACTUAL    | NULL    |
+| NEXT      | NULL    |
+| PREV      | NULL    |
+| ADD_BEG 2 |         |
+| ACTUAL    | 2       |
+| NEXT      | 2       |
+| PREV      | 2       |
+| DEL_END   |         |
+| ACTUAL    | NULL    |
+| NEXT      | NULL    |
+| PREV      | NULL    |
+| ADD_END 3 |         |
+| ACTUAL    | 3       |
+| NEXT      | 3       |
+| PREV      | 3       |
+| DEL_BEG   |         |
+| ACTUAL    | NULL    |
+| NEXT      | NULL    |
+| PREV      | NULL    |
